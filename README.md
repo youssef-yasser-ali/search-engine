@@ -82,11 +82,14 @@ search-engine/
 │   └── css/
 │       └── style.css     # Custom styles
 ├── templates/
-│   ├── base.html         # Base template
-│   ├── index.html        # Homepage
-│   └── search.html       # Search results page
-├── output.txt            # Inverted index
-├── requirements.txt      # Dependencies
+│   ├── base.html         # Base template with common structure
+│   ├── index.html        # Homepage template
+│   └── search.html       # Search results page template
+├── data/                 # Folder containing part_*.txt files with URLs
+│   ├── part_1.txt
+│   ├── part_2.txt
+│   ├── part_3.txt
+├── requirements.txt      # Python dependencies
 └── README.md             # Documentation
 ```
 

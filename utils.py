@@ -3,39 +3,30 @@ from urllib.parse import unquote
 
 def decode_url(encoded_text):
     try:
-        # Remove metadata (like (1)) if present
         if "(" in encoded_text and encoded_text.endswith(")"):
-            encoded_text = encoded_text.split("(")[0]
+            encoded_text = encoded_text.rsplit("(", 1)[0]
 
-        print('url after encoding : ', encoded_text)
+        return unquote(encoded_text)
 
-        encoded_text = encoded_text.replace('_', '/')
 
-        # Decode the URL
-        url_path = unquote(encoded_text)
         
-        # Ensure it starts with https://
-        if not url_path.startswith("http"):
-            url_path = f"https://{url_path}"
-            
-        return url_path
     except Exception as e:
         print(f"Warning: Could not decode URL '{encoded_text}': {str(e)}")
         return encoded_text
 
-def search_word(word, file_path="output.txt"):
-    print(word)
-    """Search for word in index file and return properly formatted App Store URLs"""
+def search_word(word, folder="data"):
+    """Search all part_*.txt files in the specified folder for a word and return decoded URLs"""
+    decoded_urls = []
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            next(f)  # Skip header
-            for line in f:
-                if line.startswith(word + "|"):
-                    parts = line.strip().split("|")
-                    if len(parts) >= 3:
-                        urls = parts[2].split(" ")
-                        return [decode_url(u) for u in urls]
-        return []
-    except FileNotFoundError:
-        print('file not found')
-        return []
+        for file in sorted(f for f in os.listdir(folder) if f.startswith("part_") and f.endswith(".txt")):
+            file_path = os.path.join(folder, file)  # Build the full file path
+            with open(file_path, "r", encoding="utf-8") as f:
+                lines = f.read().strip().split("\n")
+                for line in lines[1:]:  # Skip the first line (if necessary)
+                    parts = line.strip().split("|||")
+                    if len(parts) >= 3 and parts[0].strip() == word:
+                        urls = parts[2].strip().split(" ")
+                        decoded_urls.extend(decode_url(u) for u in urls if u)
+    except Exception as e:
+        print(f"Failed to read files in folder '{folder}': {e}")
+    return decoded_urls
