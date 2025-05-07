@@ -1,83 +1,108 @@
 # Search Engine Application
 
-A Flask-based web application for scraping website content and extracting links.
+A Flask-based web application for searching through scraped website content with a clean web interface.
 
 ## Features
 
-- Display found links from each page
-- Simple web interface for easy use
+- **Web Search Interface**: Clean HTML/CSS frontend
+- **API Endpoint**: `/api/search` for programmatic access
+- **Template Inheritance**: Efficient HTML structure using `base.html`
+- **Pagination**: Built-in support for large result sets
 
 ## Installation
 
-1. open terminal and navigate to the project directory:
+1.  navigate to the project directory:
 
-   ```bash
-   cd search-engine
-   ```
+```bash
+cd search-engine
+```
 
 2. Create and activate a virtual environment:
 
-   ```bash
-   python -m venv venv
-   # On Windows:
-   venv\Scripts\activate
-   # On macOS/Linux:
-   source venv/bin/activate
-   ```
+```bash
+python -m venv venv
+# Windows:
+venv\Scripts\activate
+
+# macOS/Linux:
+source venv/bin/activate
+```
 
 3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Configuration
 
-1. download these inverted index file from Google Drive and place them in the project directory:
+1. Download and prepare the inverted index file:
 
-   ```bash
-   gdown https://drive.google.com/uc?id=1KBHb6r_i3KbQkXvnaITCWQkCIv4TLm_5
-
-   ```
-
-2. extract the inverted index files:
-
-   ```bash
-   bzip2 -d output.txt.bz2
-   ```
-
-3. Make sure you have the following files in the project directory:
-
-   ```
-   output.txt
-   ```
+```bash
+gdown https://drive.google.com/uc?id=1KBHb6r_i3KbQkXvnaITCWQkCIv4TLm_5
+bzip2 -d output.txt.bz2
+```
 
 ## Usage
 
-1. Run the application:
+### Running the Application
 
-   ```bash
-   python app.py
-   ```
+```bash
+python app.py
+```
 
-2. Open your browser to:
+Access the application at: `http://localhost:5000`
 
-   ```
-   http://localhost:5000
-   ```
+### API Usage
+
+Make GET requests to:
+
+```
+http://localhost:5000/api/search?q=your_query
+```
+
+Example response:
+
+```json
+{
+  "query": "your_query",
+  "results": [...],
+  "count": 25
+}
+```
 
 ## Project Structure
 
 ```
 search-engine/
-├── app.py                # Main application file
+├── app.py                # Main application (Flask routes)
+├── utils.py              # Search functionality
+├── static/
+│   └── css/
+│       └── style.css     # Custom styles
+├── templates/
+│   ├── base.html         # Base template
+│   ├── index.html        # Homepage
+│   └── search.html       # Search results page
+├── output.txt            # Inverted index
 ├── requirements.txt      # Dependencies
-├── templates/            # HTML templates
-│   └── index.html        # Main interface
-└── README.md             # This file
+└── README.md             # Documentation
 ```
+
+## Development
+
+- **Debug Mode**: Automatically enabled when running `app.py`
+- **Auto-Reload**: Templates and static files update without restart
+- **Debugger PIN**: Shown in console for error debugging
 
 ## Limitations
 
-- May not work with JavaScript-heavy websites
-- Some websites may block scraping attempts
-- Limited to scraping publicly accessible pages
+- Requires pre-built inverted index (output.txt)
+- Currently uses basic string matching in search
+- No authentication or rate limiting on API
+
+## Future Improvements
+
+- Add proper search ranking
+- Implement incremental indexing
+- Add user accounts and search history
