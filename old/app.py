@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, flash
-from helper_functions import scrape_page, build_index
+from old.helper_functions import scrape_page, build_index
 from collections import defaultdict
 
 app = Flask(__name__)
