@@ -37,12 +37,12 @@ pip install -r requirements.txt
 
 ## Configuration
 
-1. Download and prepare the inverted index file:
+1. Download and prepare the inverted index files
 
-```bash
-gdown https://drive.google.com/uc?id=1KBHb6r_i3KbQkXvnaITCWQkCIv4TLm_5
-bzip2 -d output.txt.bz2
-```
+   - The inverted index is a compressed file containing the URLs and their corresponding indices.
+   - Download the `output.zip` file from Google Drive:
+
+2. Unzip the file and place the `part_*.txt` files in the `data/` directory.
 
 ## Usage
 
