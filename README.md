@@ -1,11 +1,9 @@
-# Web Scraper Application
+# Search Engine Application
 
 A Flask-based web application for scraping website content and extracting links.
 
 ## Features
 
-- Scrape multiple websites simultaneously
-- Extract page titles and main content
 - Display found links from each page
 - Simple web interface for easy use
 
@@ -32,6 +30,27 @@ A Flask-based web application for scraping website content and extracting links.
    pip install -r requirements.txt
    ```
 
+## Configuration
+
+1. download these inverted index file from Google Drive and place them in the project directory:
+
+   ```bash
+   gdown https://drive.google.com/uc?id=1KBHb6r_i3KbQkXvnaITCWQkCIv4TLm_5
+
+   ```
+
+2. extract the inverted index files:
+
+   ```bash
+   bzip2 -d output.txt.bz2
+   ```
+
+3. Make sure you have the following files in the project directory:
+
+   ```
+   output.txt
+   ```
+
 ## Usage
 
 1. Run the application:
@@ -45,16 +64,6 @@ A Flask-based web application for scraping website content and extracting links.
    ```
    http://localhost:5000
    ```
-
-3. Enter website URLs (one per line) in the text area and click "Scrape"
-
-## Example Input
-
-```
-https://www.example.com
-https://en.wikipedia.org/wiki/Web_scraping
-https://www.python.org
-```
 
 ## Project Structure
 
