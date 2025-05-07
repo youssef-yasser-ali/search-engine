@@ -21,6 +21,7 @@ cd search-engine
 
 ```bash
 python -m venv venv
+
 # Windows:
 venv\Scripts\activate
 
