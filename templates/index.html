@@ -1,90 +1,76 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <title>Minimal Web Scraper</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <title>URL Search</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      .search-box {
+        margin: 20px 0;
+      }
+      input[type="text"] {
+        padding: 8px;
+        width: 300px;
+      }
+      button {
+        padding: 8px 15px;
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #0056b3;
+      }
+      .result {
+        margin: 10px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+      }
+      .result a {
+        color: #007bff;
+        text-decoration: none;
+      }
+      .result a:hover {
+        text-decoration: underline;
+      }
+      .api-info {
+        margin-top: 30px;
+        padding: 15px;
+        background: #f5f5f5;
+      }
+    </style>
   </head>
-  <body class="bg-light">
-    <div class="container py-4">
-      <h1 class="mb-4">Web Scraper & Search</h1>
+  <body>
+    <h1>URL Search</h1>
+    <div class="search-box">
+      <form action="/search" method="get">
+        <input
+          type="text"
+          name="q"
+          placeholder="Enter search term..."
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+    </div>
 
-      <!-- Flash messages -->
-      {% with messages = get_flashed_messages(with_categories=true) %} {% if
-      messages %} {% for category, message in messages %}
-      <div class="alert alert-{{ category }}">{{ message }}</div>
-      {% endfor %} {% endif %} {% endwith %}
-
-      <!-- Scrape form -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <h5 class="card-title">Scrape Websites</h5>
-          <form method="POST">
-            <div class="mb-3">
-              <label class="form-label">Enter URLs (one per line):</label>
-              <textarea name="urls" class="form-control" rows="3" required>
-                https://www.example.com
-                https://en.wikipedia.org/wiki/Web_scraping
-                https://www.bbc.com/news
-                https://www.python.org
-                https://www.nytimes.com
-            </textarea
-              >
-            </div>
-            <button type="submit" class="btn btn-primary">Scrape</button>
-          </form>
-        </div>
-      </div>
-
-      <!-- Search form -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <h5 class="card-title">Search</h5>
-          <form method="POST">
-            <div class="input-group">
-              <input
-                type="text"
-                name="query"
-                class="form-control"
-                placeholder="Search..."
-                value="{{ query if query else '' }}"
-                required
-              />
-              <button type="submit" class="btn btn-primary">Search</button>
-            </div>
-          </form>
-        </div>
-      </div>
-
-      <!-- Results -->
-      {% if results is not none %}
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">
-            {% if results %} Found {{ results|length }} results {% else %} No
-            results found {% endif %}
-          </h5>
-
-          {% if results %}
-          <div class="list-group">
-            {% for page in results %}
-            <a
-              href="{{ page.url }}"
-              target="_blank"
-              class="list-group-item list-group-item-action"
-            >
-              <h6>{{ page.title }}</h6>
-              <small class="text-muted">{{ page.url }}</small>
-              <p class="mt-2 text-truncate">{{ page.content[:200] }}...</p>
-            </a>
-            {% endfor %}
-          </div>
-          {% endif %}
-        </div>
-      </div>
-      {% endif %}
+    <div class="api-info">
+      <h2>API Usage</h2>
+      <p>You can also use our search API:</p>
+      <code>GET /api/search?q=your_search_term</code>
+      <p>
+        Example:
+        <a href="/api/search?q=youssef" target="_blank"
+          >/api/search?q=youssef</a
+        >
+      </p>
     </div>
   </body>
 </html>
