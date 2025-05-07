@@ -1,0 +1,29 @@
+{% extends "base.html" %} {% block title %}Search Results{% endblock %} {% block
+content %}
+<section class="search-container">
+  <form action="/search" method="get">
+    <div class="search-box">
+      <input
+        type="text"
+        name="q"
+        class="search-input"
+        value="{{ query }}"
+        required
+      />
+      <button type="submit" class="search-button">Search</button>
+    </div>
+  </form>
+</section>
+
+{% if results %}
+<div class="results">
+  <h3>Found {{ results|length }} results:</h3>
+  {% for url in results %}
+  <div class="result">
+    <a href="{{ url }}" target="_blank">{{ url }}</a>
+  </div>
+  {% endfor %}
+</div>
+{% elif query %}
+<p>No results found for "{{ query }}"</p>
+{% endif %} {% endblock %}

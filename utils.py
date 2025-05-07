@@ -24,6 +24,7 @@ def decode_url(encoded_text):
         return encoded_text
 
 def search_word(word, file_path="output.txt"):
+    print(word)
     """Search for word in index file and return properly formatted App Store URLs"""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
@@ -36,4 +37,5 @@ def search_word(word, file_path="output.txt"):
                         return [decode_url(u) for u in urls]
         return []
     except FileNotFoundError:
+        print('file not found')
         return []

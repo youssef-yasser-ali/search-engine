@@ -1,76 +1,22 @@
-<html>
-  <head>
-    <title>URL Search</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 20px;
-      }
-      h1 {
-        color: #333;
-      }
-      .search-box {
-        margin: 20px 0;
-      }
-      input[type="text"] {
-        padding: 8px;
-        width: 300px;
-      }
-      button {
-        padding: 8px 15px;
-        background: #007bff;
-        color: white;
-        border: none;
-        cursor: pointer;
-      }
-      button:hover {
-        background: #0056b3;
-      }
-      .result {
-        margin: 10px 0;
-        padding: 10px;
-        border: 1px solid #ddd;
-      }
-      .result a {
-        color: #007bff;
-        text-decoration: none;
-      }
-      .result a:hover {
-        text-decoration: underline;
-      }
-      .api-info {
-        margin-top: 30px;
-        padding: 15px;
-        background: #f5f5f5;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>URL Search</h1>
+{% extends "base.html" %} {% block content %}
+<section class="search-container">
+  <form action="/search" method="get">
     <div class="search-box">
-      <form action="/search" method="get">
-        <input
-          type="text"
-          name="q"
-          placeholder="Enter search term..."
-          required
-        />
-        <button type="submit">Search</button>
-      </form>
+      <input
+        type="text"
+        name="q"
+        class="search-input"
+        placeholder="Enter keywords..."
+        required
+      />
+      <button type="submit" class="search-button">Search</button>
     </div>
+  </form>
+</section>
 
-    <div class="api-info">
-      <h2>API Usage</h2>
-      <p>You can also use our search API:</p>
-      <code>GET /api/search?q=your_search_term</code>
-      <p>
-        Example:
-        <a href="/api/search?q=youssef" target="_blank"
-          >/api/search?q=youssef</a
-        >
-      </p>
-    </div>
-  </body>
-</html>
+<!-- <section class="api-docs">
+  <h2>API Documentation</h2>
+  <p>Use our API: <code>GET /api/search?q=term</code></p>
+  <a href="/api/search?q=example" target="_blank">Example</a>
+</section> -->
+{% endblock %}
